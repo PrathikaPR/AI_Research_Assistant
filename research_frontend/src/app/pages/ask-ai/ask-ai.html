@@ -1,0 +1,103 @@
+<!-- 🌌 FIXED BACKGROUND -->
+<div class="ask-ai-bg">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="orb orb-4"></div>
+</div>
+
+<!-- 🤖 ASK AI PAGE -->
+<div class="ask-ai-page" [class.chat-started]="chats.length > 0">
+
+  <!-- 🔥 HEADER -->
+  <div class="ai-header">
+    <h1 class="title">Ask AI</h1>
+    <p class="subtitle">Ask anything about your uploaded document</p>
+
+    <!-- 🗑️ CLEAR BUTTON -->
+    <button
+      class="clear-btn"
+      *ngIf="chats.length > 0"
+      (click)="clearChat()"
+    >
+      🗑️ Clear Chat
+    </button>
+  </div>
+
+  <!-- ⚠️ NO PAPER WARNING -->
+  <div class="no-paper-box" *ngIf="!hasPaper">
+    <div class="no-paper-icon">📄</div>
+    <p class="no-paper-title">No Document Uploaded</p>
+    <p class="no-paper-sub">Please upload a PDF first to start asking questions.</p>
+  </div>
+
+  <!-- 💬 CHAT CONTAINER -->
+  <div class="chat-container" *ngIf="hasPaper">
+
+    <!-- 🤖 WELCOME MESSAGE -->
+    <div class="welcome-msg" *ngIf="chats.length === 0">
+      <div class="welcome-icon">🤖</div>
+      <p class="welcome-title">Ready to Answer!</p>
+      <p class="welcome-sub">Ask me anything about your uploaded document.</p>
+    </div>
+
+    <div *ngFor="let chat of chats">
+
+      <!-- 👤 USER -->
+      <div class="message-row user-row">
+        <div class="message user-message">
+          <span class="msg-label">You</span>
+          {{ chat.question }}
+        </div>
+      </div>
+
+      <!-- 🤖 AI -->
+      <div class="message-row ai-row">
+        <div class="message ai-message">
+          <span class="msg-label">AI</span>
+
+          <!-- ⏳ Typing loader per message -->
+          <div class="ai-loader" *ngIf="chat.loading">
+            <span></span><span></span><span></span>
+          </div>
+
+          <span *ngIf="!chat.loading">{{ chat.answer }}</span>
+              <!-- 🔊 SPEAK BUTTON -->
+    <button
+      class="msg-speak-btn"
+      *ngIf="!chat.loading"
+      (click)="toggleSpeak(chat)"
+    >
+      <span *ngIf="!chat.speaking">🔊</span>
+      <span *ngIf="chat.speaking">⏹</span>
+    </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 📌 SCROLL ANCHOR -->
+    <div #chatBottom></div>
+
+  </div>
+
+  <!-- ✨ INPUT SECTION -->
+  <div class="input-section" *ngIf="hasPaper">
+    <input
+      type="text"
+      class="question-input"
+      placeholder="Ask something about your document..."
+      [(ngModel)]="userQuestion"
+      (keyup.enter)="askAI()"
+      [disabled]="loading"
+    />
+    <button
+      class="ask-btn"
+      (click)="askAI()"
+      [disabled]="loading || !userQuestion.trim()"
+    >
+      {{ loading ? '...' : 'Ask AI' }}
+    </button>
+  </div>
+
+</div>

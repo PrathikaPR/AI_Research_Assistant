@@ -1,0 +1,94 @@
+<div class="flowchart-page">
+
+  <!-- BACKGROUND -->
+  <div class="bg-circle bg1"></div>
+  <div class="bg-circle bg2"></div>
+  <div class="bg-circle bg3"></div>
+
+  <div class="flowchart-wrapper">
+
+    <!-- TOP -->
+    <div class="top-section">
+      <h1 class="heading1">AI Flowchart Generator</h1>
+      <p class="heading2">Upload PDF → Analyze Content → Generate Smart Flowchart</p>
+    </div>
+
+    <!-- CARD -->
+    <div class="flowchart-card">
+
+      <!-- HEADER -->
+      <div class="flowchart-header">
+        <div class="status">
+          <div class="status-dot" [class.loading-dot]="loading"></div>
+          <span>{{ loading ? 'Generating...' : flowchartSteps.length > 0 ? 'Flowchart Ready' : 'Ready to Generate' }}</span>
+        </div>
+
+        <div class="action-buttons">
+          <!-- COPY -->
+          <button class="icon-btn" [class.success]="copied" (click)="copyFlowchart()" title="Copy">
+            <span *ngIf="!copied">📋</span>
+            <span *ngIf="copied" class="tick">✔</span>
+          </button>
+          <!-- DOWNLOAD -->
+          <button class="icon-btn" (click)="downloadFlowchart()" title="Download PNG">
+            📥
+          </button>
+        </div>
+      </div>
+
+      <!-- CONTENT -->
+      <div class="flowchart-container">
+
+        <!-- NO PAPER -->
+        <div class="no-paper-box" *ngIf="!hasPaper">
+          <div class="no-paper-icon">📄</div>
+          <p class="no-paper-title">No Document Uploaded</p>
+          <p class="no-paper-sub">Please upload a PDF first to generate a flowchart.</p>
+        </div>
+
+        <!-- LOADER -->
+        <div class="loader-wrapper" *ngIf="loading && hasPaper">
+          <div class="ring-loader">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <h3>Generating Flowchart...</h3>
+          <p>AI is analyzing your document and building the workflow</p>
+        </div>
+
+        <!-- FLOWCHART VISUAL OUTPUT -->
+        <div class="flowchart-output" *ngIf="!loading && flowchartSteps.length > 0" #flowchartBox>
+          <div class="steps-wrapper">
+            <div *ngFor="let step of flowchartSteps; let i = index; let last = last">
+
+              <!-- STEP BOX -->
+              <div class="step-box" [class.first-step]="i === 0" [class.last-step]="last">
+                <div class="step-number">{{ i + 1 }}</div>
+                <div class="step-text">{{ step }}</div>
+              </div>
+
+              <!-- ARROW -->
+              <div class="arrow" *ngIf="!last">▼</div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- EMPTY STATE -->
+        <div class="empty-state" *ngIf="!loading && flowchartSteps.length === 0 && hasPaper">
+          <p>🔄 Click "Generate Flowchart" to start</p>
+        </div>
+
+      </div>
+
+      <!-- GENERATE BUTTON -->
+      <div class="generate-section">
+        <button class="generate-btn" (click)="generateFlowchart(paperId)" [disabled]="loading || !hasPaper">
+          {{ loading ? 'Generating...' : '⚡ Generate Flowchart' }}
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>

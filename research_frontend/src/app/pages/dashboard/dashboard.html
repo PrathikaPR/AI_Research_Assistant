@@ -1,0 +1,251 @@
+<!-- 🌌 BACKGROUND -->
+<div class="background">
+  <div class="glow glow1"></div>
+  <div class="glow glow2"></div>
+  <div class="glow glow3"></div>
+  <div class="grid-overlay"></div>
+</div>
+
+<!-- 🧠 DASHBOARD -->
+<div class="dashboard-container">
+
+  <!-- HERO SECTION -->
+  <section class="hero-section">
+    <div class="hero-content">
+
+      <span class="badge">✨ AI Powered Document Intelligence</span>
+
+      <h1>Your PDF, <br> Understood by AI</h1>
+
+      <p class="research">
+        Upload any PDF — research papers, books, reports, or lecture notes.
+        Get instant summaries, ask questions, and visualize content as flowcharts.
+      </p>
+
+      <!-- ACTIVE PAPER BANNER -->
+      <div class="active-paper" *ngIf="hasPaper">
+        <span class="active-dot"></span>
+        <span>Active: <strong>{{ uploadedFileName }}</strong></span>
+      </div>
+
+      <div class="hero-buttons">
+        <button routerLink="/upload" class="primary-btn">
+          📄 Upload PDF
+        </button>
+        <button routerLink="/ask-ai" class="secondary-btn">
+          🤖 Ask AI
+        </button>
+        <button class="history-btn" (click)="toggleHistory()">
+          📜 History
+        </button>
+      </div>
+
+    </div>
+
+    <!-- HERO VISUAL -->
+    <div class="hero-visual">
+      <div class="visual-card">
+        <div class="visual-icon">🧠</div>
+        <p class="visual-label">AI Analyzing...</p>
+        <div class="visual-bar"><div class="visual-fill"></div></div>
+        <div class="visual-bar"><div class="visual-fill v2"></div></div>
+        <div class="visual-bar"><div class="visual-fill v3"></div></div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ⚡ RECENT ACTIVITY TIMELINE -->
+  <section class="activity-section">
+
+    <div class="activity-header">
+      <div class="activity-title">
+        <span class="activity-live-dot"></span>
+        ⚡ Recent Activity
+      </div>
+      <span class="activity-sub">Your last actions</span>
+    </div>
+
+    <div class="no-activity" *ngIf="activities.length === 0">
+      <div class="no-activity-icon">🕐</div>
+      <p class="no-activity-title">No activity yet</p>
+      <p class="no-activity-sub">Upload a PDF to get started</p>
+    </div>
+
+    <div class="timeline" *ngIf="activities.length > 0">
+      <div class="timeline-item" *ngFor="let a of activities; let last = last">
+        <div class="timeline-left">
+          <div class="timeline-icon-wrap" [style.background]="a.bg">{{ a.icon }}</div>
+          <div class="timeline-connector" *ngIf="!last"></div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-top">
+            <span class="timeline-action">{{ a.text }}</span>
+            <span class="timeline-time">{{ a.time }}</span>
+          </div>
+          <p class="timeline-detail">{{ a.detail }}</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ⚡ FEATURES -->
+<section class="feature-grid">
+  <div
+    class="feature-card"
+    *ngFor="let f of features"
+    [routerLink]="f.route"
+    [style.--card-color]="f.color"
+    [style.font-family]="f.fontFamily"
+  >
+    <div class="feature-icon">{{ f.icon }}</div>
+
+    <h3
+      [style.color]="f.titleColor"
+      [style.font-size]="f.titleSize"
+    >
+      {{ f.title }}
+    </h3>
+
+    <p
+      [style.color]="f.descColor"
+      [style.font-size]="f.descSize"
+    >
+      {{ f.desc }}
+    </p>
+
+    <div class="feature-arrow">→</div>
+  </div>
+</section>
+
+</div>
+
+<!-- 📜 HISTORY BACKDROP -->
+<div
+  class="history-backdrop"
+  [class.open]="historyOpen"
+  (click)="closeHistory()"
+></div>
+
+<!-- 📜 HISTORY PANEL -->
+<div class="history-panel" [class.open]="historyOpen">
+
+  <div class="history-panel-header">
+    <div class="history-panel-title">
+      <span class="history-panel-icon">📜</span>
+      <span>PAPER HISTORY</span>
+    </div>
+    <button class="history-close-btn" (click)="closeHistory()">✕</button>
+  </div>
+
+  <div class="history-loading" *ngIf="historyLoading">
+    <div class="history-spinner">
+      <span></span><span></span><span></span>
+    </div>
+    <p>Loading history...</p>
+  </div>
+
+  <div class="history-empty" *ngIf="!historyLoading && papers.length === 0">
+    <div class="history-empty-icon">📭</div>
+    <p class="history-empty-title">No papers yet</p>
+    <p class="history-empty-sub">Upload a PDF to get started</p>
+  </div>
+
+  <div class="history-list" *ngIf="!historyLoading && papers.length > 0">
+    <div class="history-item" *ngFor="let paper of papers" (click)="selectPaper(paper)">
+  <div class="history-item-left">
+    <div class="history-item-icon">📄</div>
+    <div class="history-item-info">
+      <p class="history-item-title">{{ paper.title || 'Untitled Paper' }}</p>
+      <p class="history-item-date">{{ paper.createdAt | date: 'MMM d, y · h:mm a' }}</p>
+    </div>
+  </div>
+  <div class="history-item-right">
+    <button class="delete-btn" (click)="deletePaper(paper._id, $event)">🗑️</button>
+    <div class="history-item-arrow">›</div>
+  </div>
+</div>
+  </div>
+
+</div>
+
+<!-- 📄 DETAIL PANEL -->
+<div class="detail-panel" [class.open]="detailOpen">
+
+  <div class="history-panel-header">
+    <div class="history-panel-title">
+      <button class="detail-back-btn" (click)="closeDetail()">← Back</button>
+      <span class="detail-paper-name">{{ selectedPaper?.title || 'Paper' }}</span>
+    </div>
+    <button class="history-close-btn" (click)="closeAll()">✕</button>
+  </div>
+
+  <div class="detail-tabs">
+    <button
+      class="detail-tab"
+      *ngFor="let tab of detailTabs"
+      [class.active]="activeTab === tab.key"
+      (click)="activeTab = tab.key"
+    >
+      {{ tab.icon }} {{ tab.label }}
+    </button>
+  </div>
+
+  <div class="detail-content">
+
+    <!-- SUMMARY -->
+    <div *ngIf="activeTab === 'summary'">
+      <div class="detail-text-box" *ngIf="selectedPaper?.summary">
+        <pre class="detail-pre">{{ selectedPaper?.summary }}</pre>
+      </div>
+      <div class="detail-empty" *ngIf="!selectedPaper?.summary">
+        <p>No summary generated for this paper yet.</p>
+      </div>
+    </div>
+
+    <!-- QUESTIONS -->
+    <div *ngIf="activeTab === 'questions'">
+      <div *ngIf="selectedPaper?.questions?.length > 0">
+        <div class="detail-question-card" *ngFor="let q of selectedPaper?.questions; let i = index">
+          <div class="detail-q-number">Q{{ i + 1 }}</div>
+          <div class="detail-q-text">{{ q }}</div>
+        </div>
+      </div>
+      <div class="detail-empty" *ngIf="!selectedPaper?.questions?.length">
+        <p>No questions generated for this paper yet.</p>
+      </div>
+    </div>
+
+    <!-- CHATS -->
+    <div *ngIf="activeTab === 'chats'">
+      <div *ngIf="selectedPaper?.chats?.length > 0">
+        <div class="detail-chat-item" *ngFor="let chat of selectedPaper?.chats">
+          <div class="detail-chat-user">
+            <span class="chat-label user-label">You</span>
+            <p>{{ chat.question }}</p>
+          </div>
+          <div class="detail-chat-ai">
+            <span class="chat-label ai-label">AI</span>
+            <p>{{ chat.answer }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="detail-empty" *ngIf="!selectedPaper?.chats?.length">
+        <p>No chats for this paper yet.</p>
+      </div>
+    </div>
+
+    <!-- FLOWCHART -->
+    <div *ngIf="activeTab === 'flowchart'">
+      <div class="detail-text-box" *ngIf="selectedPaper?.flowchart">
+        <pre class="detail-pre">{{ selectedPaper?.flowchart }}</pre>
+      </div>
+      <div class="detail-empty" *ngIf="!selectedPaper?.flowchart">
+        <p>No flowchart generated for this paper yet.</p>
+      </div>
+    </div>
+
+  </div>
+
+</div>

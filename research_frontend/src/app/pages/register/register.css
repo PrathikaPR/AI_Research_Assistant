@@ -1,0 +1,440 @@
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:#072e42;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+:host {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #000;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  overflow: hidden;
+}
+
+
+/* ===========================
+   MAIN LAYOUT
+=========================== */
+
+.container{
+    display:flex;
+    align-items:center;
+    gap:120px;
+    justify-content: space-between;
+    padding: 0 180px;
+}
+
+/* ===========================
+   BOTTLE SECTION
+=========================== */
+
+.jar-section{
+    position:relative;
+    width:320px;
+    height:560px;
+    
+    animation: floatBottle 4s ease-in-out infinite;
+}
+@keyframes floatBottle {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-18px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* METAL LID */
+.lid{
+    position:absolute;
+    top:165px;
+    left:50%;
+    transform:translateX(-50%) rotate(0deg);
+    width:220px;
+    height:52px;
+    border-radius:40px;
+    background:linear-gradient(
+        to bottom,
+        #ffffff,
+        #d8d8d8,
+        #b0b0b0,
+        #8a8a8a
+    );
+    box-shadow:
+        0 12px 20px rgba(0,0,0,.25),
+        inset 0 2px 4px rgba(255,255,255,.8);
+    transition:1s ease;
+    z-index:20;
+    cursor:pointer;
+}
+
+.lid:hover{
+    transform:translateX(-50%) scale(1.03);
+}
+
+/* THREAD AREA */
+.jar-neck{
+    position:absolute;
+    top:195px;
+    left:50%;
+    transform:translateX(-50%);
+    width:200px;
+    height:45px;
+    border-radius:20px;
+    border:2px solid rgba(255,255,255,.22);
+    background:repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,.18) 0px,
+        rgba(255,255,255,.18) 2px,
+        transparent 2px,
+        transparent 8px
+    );
+    z-index:5;
+}
+
+/* BOTTLE BODY */
+.jar{
+    position:absolute;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:270px;
+    height:320px;
+    border-radius:35px 35px 25px 25px;
+    border:2px solid rgba(255,255,255,.28);
+    background:linear-gradient(
+        to bottom,
+        rgba(255,255,255,.22),
+        rgba(255,255,255,.03)
+    );
+    overflow:hidden;
+    box-shadow:
+        inset 0 0 40px rgba(255,255,255,.12),
+        0 20px 40px rgba(0,0,0,.18);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    animation: jarFloat 4s ease-in-out infinite;
+}
+
+
+/* SHOULDER CURVES */
+.jar::before{
+    content:"";
+    position:absolute;
+    top:-35px;
+    left:50%;
+    transform:translateX(-50%);
+    width:220px;
+    height:70px;
+    border-radius:40px;
+    border:2px solid rgba(255,255,255,.20);
+    background:rgba(255,255,255,.05);
+}
+
+/* GLASS REFLECTIONS */
+.left-glass{
+    position:absolute;
+    left:15px;
+    top:35px;
+    width:16px;
+    height:300px;
+    border-radius:20px;
+    background:linear-gradient(
+        to bottom,
+        rgba(255,255,255,.85),
+        transparent
+    );
+}
+
+.right-glass{
+    position:absolute;
+    right:20px;
+    top:55px;
+    width:6px;
+    height:240px;
+    border-radius:20px;
+    background:rgba(255,255,255,.55);
+}
+
+/* SIDE PANELS */
+.left-panel,
+.right-panel{
+    position:absolute;
+    top:100px;
+    width:42px;
+    height:210px;
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:12px;
+}
+
+.left-panel{ left:-10px; }
+.right-panel{ right:-10px; }
+
+/* BOTTOM GLASS */
+.bottom-ring{
+    position:absolute;
+    bottom:12px;
+    left:50%;
+    transform:translateX(-50%);
+    width:220px;
+    height:22px;
+    border-radius:50%;
+    border:2px solid rgba(255,255,255,.18);
+}
+
+/* SECURITY GLOW */
+.security-glow{
+    position:absolute;
+    inset:0;
+    opacity:0;
+    transition:1s;
+    background:radial-gradient(
+        circle,
+        rgba(255,215,0,.25),
+        transparent 70%
+    );
+    pointer-events:none;
+}
+
+/* ===========================
+   VAULT PAPER — centered in jar
+=========================== */
+
+.vault-paper{
+    position:relative;
+    z-index:10;
+    width:170px;
+    min-height:170px;
+    padding:14px;
+    border-radius:12px;
+    background:rgba(255,255,255,.15);
+    border:1px solid rgba(255,255,255,.25);
+    backdrop-filter:blur(8px);
+    color:white;
+    box-shadow:0 0 15px rgba(255,255,255,.1);
+
+    /* Hidden until lid opens */
+    opacity:0;
+    transform:scale(0.5);
+    transition:opacity .7s ease, transform .7s ease;
+}
+
+.vault-paper.visible{
+    opacity:1;
+    transform:scale(1);
+}
+
+.vault-row{
+    margin-bottom:10px;
+}
+
+.vault-row span{
+    color:#8fd3ff;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+}
+
+.vault-row p{
+    margin-top:3px;
+    color:white;
+    font-size:13px;
+    word-break:break-word;
+    min-height:16px;
+}
+
+/* ===========================
+   SUCCESS OVERLAY IN JAR
+=========================== */
+
+.jar-success{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%) scale(0);
+    width:200px;
+    text-align:center;
+    opacity:0;
+    z-index:30;
+    transition:all .8s ease;
+    pointer-events:none;
+}
+
+.jar-success.show{
+    opacity:1;
+    transform:translate(-50%,-50%) scale(1);
+}
+
+.tick{
+    font-size:70px;
+    color:#4cff78;
+    text-shadow:
+        0 0 15px #4cff78,
+        0 0 30px #4cff78;
+    animation:none;
+}
+
+.success-text{
+    margin-top:10px;
+    color:#4cff78;
+    font-size:22px;
+    font-weight:700;
+    letter-spacing:2px;
+    text-shadow:0 0 10px #4cff78;
+}
+
+@keyframes popTick{
+    0%{ transform:scale(0); }
+    60%{ transform:scale(1.3); }
+    100%{ transform:scale(1); }
+}
+
+.green-ring{
+    position:absolute;
+    width:180px;
+    height:180px;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+    border:3px solid rgba(76,255,120,.5);
+    opacity:0;
+    transition:1s;
+    box-shadow:
+        0 0 20px #4cff78,
+        inset 0 0 20px #4cff78;
+    pointer-events:none;
+}
+
+/* ===========================
+   CARD
+=========================== */
+
+.card{
+    width:420px;
+    padding-top:30px;
+    padding-bottom: 2px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border-radius:20px;
+    background:rgba(255,255,255,.05);
+    backdrop-filter:blur(10px);
+    border:1px solid rgba(171, 164, 164, 0.15);
+    box-shadow: 0 0 0 1px #989793,
+              0 8px 60px #bdbbb8,
+              inset 0 1px 0 #acaca6;
+
+  transition: transform 0.8s ease, opacity 0.8s ease, margin 0.8s ease;
+    opacity:0;
+    transform:translateX(50px);
+    pointer-events:none;
+    transition:1s;
+}
+
+.card h2{
+    color:white;
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.group{
+    margin-bottom:18px;
+}
+
+.group label{
+    display:block;
+    color:white;
+    font-size:13px;
+    margin-bottom:6px;
+}
+
+.group input{
+    width:100%;
+    padding:12px;
+    border-radius:8px;
+    border:1px solid rgba(255,255,255,.15);
+    background:rgba(255,255,255,.05);
+    color:white;
+    outline:none;
+    font-size:14px;
+    font-family:'Segoe UI',sans-serif;
+}
+
+.group input::placeholder{
+    color:rgba(255,255,255,.35);
+}
+
+.group input:focus{
+    border-color:rgba(255,255,255,.4);
+    background:rgba(255,255,255,.08);
+}
+
+.validator{
+    margin-top:6px;
+    font-size:12px;
+    min-height:18px;
+}
+
+.error{ color:#ff7676; }
+.warning{ color:#ffd166; }
+.success-msg{ color:#65ff8a; }
+
+button{
+    width:100%;
+    margin-top:10px;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    color:white;
+    font-size:15px;
+    background:linear-gradient(90deg,#7db6ff,#4b7fff);
+    transition:opacity .2s;
+}
+
+button:hover{ opacity:.88; }
+
+.success{
+    margin-top:15px;
+    text-align:center;
+    color:#7dff9f;
+    opacity:0;
+    transition:1s;
+}
+
+.login-link {
+  margin-top: 8px;
+  text-align: center;
+  font-size: 14px;
+  color: #fff;
+}
+
+.login-link a {
+  color: #00d4ff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}

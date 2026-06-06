@@ -1,0 +1,99 @@
+<body>
+
+<div class="container">
+
+    <!-- JAR -->
+    <div class="jar-section">
+        
+
+        <div id="lid" class="lid"></div>
+
+        <div class="jar-neck"></div>
+
+        <div class="jar">
+
+            <div class="left-glass"></div>
+            <div class="right-glass"></div>
+
+            <div class="left-panel"></div>
+            <div class="right-panel"></div>
+
+            <div class="bottom-ring"></div>
+
+            <div id="glow" class="security-glow"></div>
+
+            <!-- VAULT PAPER — centered by flexbox on .jar -->
+            <div class="vault-paper" id="vaultPaper">
+
+                <div class="vault-row">
+                    <span>Name</span>
+                    <p id="nameView">—</p>
+                </div>
+
+                <div class="vault-row">
+                    <span>Email</span>
+                    <p id="emailView">—</p>
+                </div>
+
+                <div class="vault-row">
+                    <span>Password</span>
+                    <p id="passView">—</p>
+                </div>
+
+                <div class="vault-row">
+                    <span>Confirm</span>
+                    <p id="confirmView">—</p>
+                </div>
+
+            </div>
+
+            <!-- SUCCESS OVERLAY -->
+            <div id="jarSuccess" class="jar-success">
+                <div class="tick">✓</div>
+                <div class="success-text">ACCOUNT<br>SECURED</div>
+            </div>
+
+            <div class="green-ring" id="greenRing"></div>
+
+        </div>
+
+    </div>
+
+    <!-- REGISTER CARD -->
+    <div class="card" id="card">
+
+        <h2>Create Account</h2>
+
+        <div class="group">
+            <label>Full Name</label>
+            <input id="name" placeholder="John Doe">
+        </div>
+
+        <div class="group">
+            <label>Email</label>
+            <input id="email" type="email" placeholder="john@example.com">
+        </div>
+
+        <div class="group">
+            <label>Password</label>
+            <input id="password" type="password" placeholder="Create a strong password">
+            <div id="passwordStrength" class="validator"></div>
+        </div>
+
+        <div class="group">
+            <label>Confirm Password</label>
+            <input id="confirm" type="password" placeholder="Repeat your password">
+            <div id="confirmMessage" class="validator"></div>
+        </div>
+
+        <button id="registerBtn">Register</button>
+        <p class="login-link">
+  Already have an account?
+  <a routerLink="/login" class="link-btn">Login here</a>
+</p>
+
+        <div id="success" class="success">✓ Account Secured</div>
+
+    </div>
+
+</div>

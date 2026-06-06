@@ -1,0 +1,98 @@
+<!-- 🌌 BACKGROUND -->
+<div class="nebula-bg">
+
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="orb orb-4"></div>
+  <div class="orb orb-5"></div>
+
+  <!-- ⭐ STARS -->
+  <div class="stars">
+    <div></div><div></div><div></div><div></div><div></div>
+    <div></div><div></div><div></div><div></div><div></div>
+    <div></div><div></div><div></div><div></div><div></div>
+    <div></div><div></div><div></div><div></div><div></div>
+  </div>
+
+</div>
+
+<!-- 📄 PAGE -->
+<div class="page-content">
+
+  <!-- 🤖 AI IMAGE -->
+  <div class="bot-image">
+    <img src="public/heyrobo.png" alt="AI Bot">
+  </div>
+
+  <!-- 📦 UPLOAD CARD -->
+  <div class="upload-container">
+
+    <h2>Drop Your PDF, Let AI Do the Rest</h2>
+
+    <!-- FILE PICKER -->
+    <div class="file-upload">
+
+      <label
+        for="fileInput"
+        class="custom-file-upload"
+      >
+        📂 Choose PDF
+      </label>
+
+      <input
+        id="fileInput"
+        type="file"
+        accept=".pdf"
+        (change)="onFileChange($event)"
+        hidden
+      />
+
+    </div>
+
+    <!-- FILE NAME -->
+    <p
+      class="selected-file"
+      *ngIf="selectedFile"
+    >
+      ✅ {{ selectedFile.name }}
+    </p>
+
+    <!-- UPLOAD BUTTON -->
+    <button
+      class="upload-btn"
+      (click)="upload()"
+      [disabled]="loading || !selectedFile"
+    >
+      {{ loading ? 'Uploading...' : 'Upload Paper' }}
+    </button>
+
+    <!-- LOADER -->
+<div *ngIf="uploadStatus === 'uploading'" class="upload-loader">
+  <div class="spinner">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <p class="loader-text">Uploading...</p>  <!-- ✅ Simpler text -->
+</div>
+
+<!-- SUCCESS -->
+<div *ngIf="uploadStatus === 'success'" class="success-box">
+  <div class="success-icon-wrap">
+    <svg class="checkmark" viewBox="0 0 52 52">
+      <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+      <path class="checkmark-check" fill="none" d="M14 27 l8 8 l16 -16"/>
+    </svg>
+  </div>
+  <p class="success-title">SUCCESS</p>
+  <p class="success-sub">Paper uploaded successfully</p>
+</div>
+
+<!-- ERROR -->
+<div *ngIf="uploadStatus === 'error'" class="error-box">
+  <div class="error-icon">✕</div>
+  <span>{{ message || 'Upload Failed. Try again.' }}</span>
+</div>
+
+</div>

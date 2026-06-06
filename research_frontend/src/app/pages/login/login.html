@@ -1,0 +1,154 @@
+<!-- STATUS BADGE -->
+<div class="lamp-status" id="statusBadge">
+  <span class="status-dot" id="statusDot"></span>
+  <span class="status-icon" id="statusIcon">🌙</span>
+  <span id="statusText">Lamp: OFF</span>
+</div>
+
+<div class="scene" id="scene">
+  <div class="lamp-glow-bg" id="lampGlowBg"></div>
+
+  <!-- LAMP SIDE -->
+  <div class="lamp-side" id="lampSide">
+    <div class="room-floor" id="roomFloor"></div>
+
+    <!-- particles -->
+    <div class="lamp-particles" id="particles"></div>
+
+    <!-- PULL HINT -->
+    <div class="pull-hint">
+      <div class="pull-arrows"></div>
+    </div>
+
+    <!-- LAMP SVG -->
+    <div class="lamp-wrap" id="lampWrap" (click)="toggleLamp()">
+      <svg class="lamp-svg" id="lampSvg" viewBox="0 0 220 460" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="shadeOn" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%"   stop-color="#2a1f0a"/>
+            <stop offset="30%"  stop-color="#4a3210"/>
+            <stop offset="55%"  stop-color="#5a3c12"/>
+            <stop offset="100%" stop-color="#1e1608"/>
+          </linearGradient>
+          <linearGradient id="shadeOff" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%"   stop-color="#1a1815"/>
+            <stop offset="50%"  stop-color="#252018"/>
+            <stop offset="100%" stop-color="#141210"/>
+          </linearGradient>
+          <radialGradient id="shadeInner" cx="50%" cy="100%" r="60%">
+            <stop offset="0%"  stop-color="#e8a020" stop-opacity="0.9"/>
+            <stop offset="60%" stop-color="#c07010" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="poleGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%"   stop-color="#1c1810"/>
+            <stop offset="40%"  stop-color="#3a3020"/>
+            <stop offset="60%"  stop-color="#2e2618"/>
+            <stop offset="100%" stop-color="#181410"/>
+          </linearGradient>
+          <radialGradient id="baseGrad" cx="50%" cy="30%" r="70%">
+            <stop offset="0%"   stop-color="#40341a"/>
+            <stop offset="100%" stop-color="#1a160c"/>
+          </radialGradient>
+          <linearGradient id="tableGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"   stop-color="#2e2410"/>
+            <stop offset="100%" stop-color="#1a1408"/>
+          </linearGradient>
+          <radialGradient id="groundCone" cx="50%" cy="0%" r="100%">
+            <stop offset="0%"   stop-color="#c08010" stop-opacity="0.5"/>
+            <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+          </radialGradient>
+          <filter id="softBlur">
+            <feGaussianBlur stdDeviation="3"/>
+          </filter>
+        </defs>
+
+        <ellipse class="shade-glow" cx="110" cy="450" rx="100" ry="18" fill="url(#groundCone)" filter="url(#softBlur)"/>
+
+        <rect x="10" y="398" width="200" height="14" rx="4" fill="url(#tableGrad)"/>
+        <rect x="0"  y="408" width="220" height="52" rx="3" fill="#120f08"/>
+
+        <ellipse cx="110" cy="396" rx="50" ry="8" fill="#0d0b07"/>
+        <ellipse cx="110" cy="392" rx="46" ry="7" fill="url(#baseGrad)"/>
+        <rect x="88" y="360" width="44" height="32" rx="4" fill="url(#baseGrad)"/>
+        <ellipse cx="110" cy="360" rx="22" ry="5" fill="#3a2e14"/>
+
+        <rect x="103" y="160" width="14" height="202" fill="url(#poleGrad)"/>
+        <rect x="108" y="160" width="2"  height="202" fill="#f7d97a" opacity="0.08"/>
+
+        <g class="pull-chain" id="pullChain" style="cursor: grab;">
+          <line id="chainLine" x1="145" y1="160" x2="145" y2="240"
+            stroke="#6a5828" stroke-width="1.5" stroke-dasharray="3,3"/>
+          <circle id="chainBall" cx="145" cy="243" r="7"
+            fill="url(#baseGrad)" stroke="#5a4820" stroke-width="1"/>
+        </g>
+
+        <polygon id="shadeMain" points="38,160 182,160 152,60 68,60" fill="url(#shadeOff)"/>
+        <rect x="65" y="55" width="90" height="10" rx="3" fill="#2a2010"/>
+        <rect x="35" y="158" width="150" height="8" rx="2" fill="#221c0c"/>
+        <polygon class="shade-glow" points="42,162 178,162 150,65 70,65" fill="url(#shadeInner)" opacity="0.85"/>
+        <polygon points="68,60 85,60 65,158 38,160" fill="rgba(255,220,100,0.04)"/>
+        <polygon points="38,160 60,160 80,65 68,60" fill="rgba(0,0,0,0.3)"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- LOGIN CARD -->
+  <div class="login-card" id="loginCard">
+
+    <div class="card-icon"></div>
+    <h1 class="card-title">Welcome back to AI Research Assistant</h1>
+    <p class="card-subtitle">Login to continue</p>
+
+    <!-- ✅ ERROR MESSAGE -->
+<!-- ✅ ERROR MESSAGE -->
+<!-- ✅ ERROR MESSAGE -->
+@if(errorMessage) {
+  <div style="display:flex; align-items:center; gap:8px; color:#ff6b6b; 
+              background:rgba(255,0,0,0.1); border:1px solid rgba(255,0,0,0.3);
+              padding:10px 15px; border-radius:8px; margin-top:12px; font-size:14px;">
+    ⚠️ {{ errorMessage }}
+  </div>
+}
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+      <div class="field-group">
+        <label class="field-label" for="email">Email</label>
+        <input class="field-input" id="email" type="email"
+          placeholder="you@example.com" autocomplete="email"
+          formControlName="email"/>
+        <span class="field-error"
+          *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+          Please enter a valid email.
+        </span>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="password">Password</label>
+        <input class="field-input" id="password" type="password"
+          placeholder="••••••••" autocomplete="current-password"
+          formControlName="password"/>
+        <span class="field-error"
+          *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+          Password is required.
+        </span>
+      </div>
+
+      <div class="forgot-row">
+        <a href="#" class="forgot-link">Forgot password?</a>
+      </div>
+
+<button class="btn-primary" type="submit" [disabled]="isLoading">
+  <span *ngIf="isLoading">⏳ Veryfying Credentials...</span>
+  <span *ngIf="!isLoading">Login</span>
+</button>
+
+    </form>
+
+    <div class="create-row">
+      No account? <a routerLink="/register" class="create-link">Register</a>
+    </div>
+  </div>
+
+</div>

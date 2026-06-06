@@ -1,0 +1,76 @@
+<!-- 🌌 BACKGROUND -->
+<div class="nebula-bg">
+
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="orb orb-4"></div>
+  <div class="orb orb-5"></div>
+
+</div>
+
+<!-- 📄 QUESTIONS PAGE -->
+<div class="questions-page">
+
+  <!-- 🔥 HEADER -->
+  <div class="questions-header">
+
+    <h1 class="title">
+      Research Questions
+    </h1>
+
+    <p class="subtitle">
+      AI Generated Questions from Uploaded Research Paper
+    </p>
+
+  </div>
+
+  <!-- ⏳ LOADER -->
+  <div
+    class="loader-wrapper"
+    *ngIf="loading"
+  >
+
+    <!-- 🔵 DOT LOADER -->
+    <!-- 🧠 HEX LOADER -->
+ <div class="spinner-dots">
+
+    <span></span>
+    <span></span>
+    <span></span>
+
+  </div>
+
+    <!-- ✨ LOADING TEXT -->
+    <div class="loading-text">
+      Generating Questions...
+    </div>
+
+  </div>
+
+  <!-- ❓ QUESTIONS -->
+  <div
+    class="questions-container"
+    *ngIf="!loading && questions.length > 0"
+  >
+
+    <div
+      class="question-card"
+      *ngFor="let question of questions; let i = index"
+    >
+
+      <!-- 🔢 QUESTION NUMBER -->
+      <div class="question-number">
+        Question {{ i + 1 }}
+      </div>
+
+      <!-- 📝 QUESTION TEXT -->
+      <div class="question-text">
+        {{ question }}
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
