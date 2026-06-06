@@ -33,7 +33,11 @@ if (!fs.existsSync(uploadPath)) {
 // ===============================
 // ⚙️ MIDDLEWARE
 // ===============================
-app.use(cors());
+app.use(cors({
+    origin: ['https://ai-research-assistant.vercel.app', 'http://localhost:4200'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
