@@ -34,7 +34,7 @@ if (!fs.existsSync(uploadPath)) {
 // ⚙️ MIDDLEWARE
 // ===============================
 app.use(cors({
-    origin: ['https://ai-research-assistant.vercel.app', 'http://localhost:4200'],
+    origin: ['https://ai-research-assistant-delta.vercel.app', 'http://localhost:4200'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }));
