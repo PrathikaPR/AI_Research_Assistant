@@ -9,7 +9,7 @@ export class PaperService {
   // =========================
   // BASE URL
   // =========================
-  private baseUrl = 'http://localhost:5000/api/papers';
+private baseUrl = 'https://research-assistant-node.onrender.com/api/papers';
 
   // =========================
   // UPLOAD PDF

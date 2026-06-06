@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({ providedIn: 'root' })
 export class ApiService {
 
-  baseUrl = 'http://localhost:5000/api/papers';
+baseUrl = 'https://research-assistant-node.onrender.com/api/papers';
 
   constructor(private http: HttpClient) {}
 

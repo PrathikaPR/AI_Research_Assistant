@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
-  private baseUrl = 'http://localhost:5000/api/auth';
+private baseUrl = 'https://research-assistant-node.onrender.com/api/auth';
 
   constructor(private http: HttpClient, private router: Router) {}
 
