@@ -5,6 +5,7 @@
   <span id="statusText">Lamp: OFF</span>
 </div>
 
+
 <div class="scene" id="scene">
   <div class="lamp-glow-bg" id="lampGlowBg"></div>
 
@@ -145,6 +146,11 @@
 </button>
 
     </form>
+    <button type="button" class="btn-demo" (click)="fillDemo()">
+  🎯 Try Demo Account
+</button>
+
+<p class="demo-hint">demo@email.com / demo123</p>
 
     <div class="create-row">
       No account? <a routerLink="/register" class="create-link">Register</a>

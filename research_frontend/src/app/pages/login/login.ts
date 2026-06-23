@@ -212,4 +212,11 @@ loginWithGoogle(): void {
     document.addEventListener('mousemove', this.onMouseMove);
     document.addEventListener('mouseup', this.onMouseUp);
   }
+
+  fillDemo(): void {
+  this.loginForm.patchValue({
+    email: 'demo@email.com',
+    password: 'demo123'
+  });
+}
 }
