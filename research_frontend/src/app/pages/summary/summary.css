@@ -69,27 +69,23 @@
   font-weight: 700;
   letter-spacing: 1px;
 
-  background: linear-gradient(
-    90deg,
-    #7be7ff,
-    #a78bfa,
-    #f472b6,
-    #7be7ff
-  );
-  background-size: 300% auto;
+  color: white;
 
-  -webkit-background-clip: text;
-  color: transparent;
-
-  animation: gradientFlow 5s linear infinite;
-  
+  animation: floatTitle 3s ease-in-out infinite;
 }
 
-@keyframes gradientFlow {
-  to {
-    background-position: 300% center;
+
+@keyframes floatTitle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
   }
 }
+
+
 
 /* 📝 SUBTITLE */
 .subtitle {
