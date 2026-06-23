@@ -29,12 +29,11 @@
   z-index: -1;
 
   overflow: hidden;
-
-  background:
-    radial-gradient(circle at 20% 20%, #102a5c, transparent 40%),
-    radial-gradient(circle at 80% 30%, #1b3b7a, transparent 45%),
-    radial-gradient(circle at 50% 80%, #0a1633, transparent 50%),
-    linear-gradient(135deg, #050816, #061a3a, #050816);
+background:
+  radial-gradient(circle at 20% 20%, #022b3a, transparent 40%),
+  radial-gradient(circle at 80% 30%, #022b3a, transparent 45%),
+  radial-gradient(circle at 50% 80%, #022b3a, transparent 50%),
+  linear-gradient(135deg, #020617, #07152e, #020617);
 
   animation:
     oceanFlow 12s ease-in-out infinite alternate;
@@ -86,7 +85,7 @@
   width: 220px;
   height: 220px;
 
-  background: #0e2960;
+  background: #0c1821;
 
   top: 10%;
   left: 15%;
@@ -99,7 +98,7 @@
   width: 180px;
   height: 180px;
 
-  background: #7c4dff;
+  background: #0c1821;
 
   top: 60%;
   left: 20%;
@@ -112,7 +111,7 @@
   width: 250px;
   height: 250px;
 
-  background: #00d4ff;
+  background: #0c1821;
 
   top: 30%;
   right: 10%;
@@ -125,7 +124,7 @@
   width: 160px;
   height: 160px;
 
-  background: #ff4fd8;
+  background: #0c1821;
 
   bottom: 10%;
   right: 25%;
@@ -138,7 +137,7 @@
   width: 200px;
   height: 200px;
 
-  background: #4dff88;
+  background: #0c1821;
 
   bottom: 20%;
   left: 50%;
@@ -193,20 +192,22 @@
 /* ✨ TITLE */
 
 .title {
-  font-family: 'Audiowide', cursive;
-  font-size: 60px;
-
-  font-weight: 700;
-
-  color: black;
-
-  text-shadow:
-    0 0 5px #b5e48c,
-    0 0 15px #ffd000,
-    0 0 30px #ffd000;
-
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 45px;
+  font-weight: 500;
+  color: white;
   margin-bottom: 16px;
+  animation: floatTitle 3s ease-in-out infinite;
+}
+@keyframes floatTitle {
 
+  0%, 100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
 
 }
 
@@ -215,9 +216,7 @@
 .subtitle {
 
   color: #cbd5e1;
-
   font-size: 18px;
-
   opacity: 0.85;
 }
 
@@ -226,15 +225,10 @@
 .questions-container {
 
   width: 100%;
-
   max-width: 1200px;
-
   margin: auto;
-
   display: flex;
-
   flex-direction: column;
-
   gap: 25px;
 }
 
@@ -244,19 +238,11 @@
 
   background:
     rgba(10,14,30,0.78);
-
   backdrop-filter: blur(14px);
-
   border-radius: 22px;
-
   padding: 30px;
-
   border:
-    1px solid rgba(255,255,255,0.08);
-
-  box-shadow:
-    0 10px 40px rgba(0,0,0,0.35);
-
+    1px solid #e1e5f2;
   transition:
     all 0.35s ease;
 }
@@ -270,6 +256,8 @@
 
   border:
     1px solid rgba(96,165,250,0.25);
+      box-shadow:
+    0 10px 40px rgba(245, 240, 240, 0.35);
 
   box-shadow:
     0 15px 45px rgba(37,99,235,0.15);
@@ -280,15 +268,10 @@
 .question-number {
 
   font-size: 15px;
-
   font-weight: 600;
-
   color: #60a5fa;
-
   margin-bottom: 16px;
-
   text-transform: uppercase;
-
   letter-spacing: 1px;
 }
 
@@ -297,9 +280,7 @@
 .question-text {
 
   font-size: 22px;
-
   line-height: 1.9;
-
   color: #e2e8f0;
 }
 /* 🌌 LOADER WRAPPER */
@@ -307,17 +288,11 @@
 .loader-wrapper {
 
   width: 100%;
-
   display: flex;
-
   flex-direction: column;
-
   align-items: center;
-
   justify-content: center;
-
   gap: 24px;
-
   margin-top: 40px;
 }
 
@@ -326,11 +301,8 @@
 .spinner-dots {
 
   display: flex;
-
   align-items: center;
-
   justify-content: center;
-
   gap: 16px;
 }
 
@@ -458,7 +430,7 @@
 
   .title {
 
-    font-size: 38px;
+    font-size: 30px;
   }
 
   .subtitle {

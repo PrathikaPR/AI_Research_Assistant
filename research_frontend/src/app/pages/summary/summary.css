@@ -65,21 +65,30 @@
 /* 🧠 TITLE */
 .title {
   margin: 0;
-
   font-size: 2.8rem;
   font-weight: 700;
-
   letter-spacing: 1px;
 
-  background: linear-gradient(90deg, #7be7ff, #ffffff, #7be7ff);
+  background: linear-gradient(
+    90deg,
+    #7be7ff,
+    #a78bfa,
+    #f472b6,
+    #7be7ff
+  );
+  background-size: 300% auto;
 
-  background-clip: text;
-  color: #fad2e1;
+  -webkit-background-clip: text;
+  color: transparent;
 
-  text-shadow:
-    0 0 5px #00f5ff,
-    0 0 15px #00f5ff,
-    0 0 30px #008cff;
+  animation: gradientFlow 5s linear infinite;
+  
+}
+
+@keyframes gradientFlow {
+  to {
+    background-position: 300% center;
+  }
 }
 
 /* 📝 SUBTITLE */

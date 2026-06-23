@@ -3,19 +3,14 @@
 :host {
   display: block;
   position: relative;
-
   width: 100%;
   min-height: 100vh;
-
   margin: 0;
   padding: 0;
-
   overflow-x: hidden;
-
-  background: transparent;
-
   font-family: "Poppins", sans-serif;
 }
+
 
 /* 🌌 FIXED BACKGROUND */
 .ask-ai-bg {
@@ -29,27 +24,47 @@
 
   overflow: hidden;
 
+  background: linear-gradient(160deg,  #0a1024, #0c1730);
+}
+
+.ask-ai-bg canvas {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+}
+
+.ask-ai-bg canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+/* 🌌 FIXED BACKGROUND */
+.ask-ai-bg {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
   background:
     radial-gradient(circle at top left,
-      rgba(0, 191, 255, 0.18),
+      #0b132b,
       transparent 25%),
-
-
     radial-gradient(circle at bottom right,
-      rgba(0, 255, 153, 0.14),
+      #0b132b,
       transparent 30%),
-
 
     linear-gradient(
       135deg,
-      #071120,
-      #08182d,
-      #0a1f38,
-      #071120
+      #0b132b,
+      #0b132b,
+      #0b132b,
+      #0b132b
     );
-
   background-size: 400% 400%;
-
   animation: bgShift 15s ease infinite;
 }
 
@@ -78,7 +93,7 @@
 
   background-image:
     linear-gradient(
-      rgba(255,255,255,0.025) 1px,
+      rgba(24, 4, 4, 0.025) 1px,
       transparent 1px
     ),
 
@@ -91,44 +106,67 @@
   background-size: 42px 42px;
 }
 
-/* ✨ FLOATING GLOW */
+/* 🌊 NEON ENERGY WAVE */
 .ask-ai-bg::after {
+
   content: "";
 
   position: absolute;
 
-  width: 700px;
-  height: 700px;
+  width: 140%;
+  height: 420px;
 
-  top: -250px;
-  right: -180px;
+  left: -20%;
+  bottom: -180px;
+
 
   background:
-    radial-gradient(
-      circle,
-      rgba(0,191,255,0.22),
-      transparent 70%
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(16, 25, 28, 0.15),
+      rgba(10, 24, 25, 0.45),
+      rgba(16, 27, 36, 0.25),
+      transparent
     );
 
-  filter: blur(90px);
 
-  animation: glowMove 10s ease-in-out infinite alternate;
+  border-radius: 50%;
+
+  filter: blur(55px);
+
+
+  transform: rotate(-8deg);
+
+
+  animation: energyWave 10s ease-in-out infinite alternate;
+
 }
 
-/* 🚀 GLOW MOVE */
-@keyframes glowMove {
 
-  from {
+
+/* 🌊 WAVE MOVEMENT */
+@keyframes energyWave {
+
+  0% {
+
     transform:
-      translateX(0px)
-      translateY(0px);
+      translateX(-80px)
+      rotate(-8deg)
+      scaleX(1);
+
   }
 
-  to {
+
+  100% {
+
     transform:
-      translateX(-40px)
-      translateY(40px);
+      translateX(80px)
+      rotate(-8deg)
+      scaleX(1.15);
+
   }
+
 }
 
 /* ✨ FLOATING ORBS */
@@ -148,7 +186,7 @@
   width: 260px;
   height: 260px;
 
-  background: #00bfff;
+  background: #0a303d;
 
   top: 10%;
   left: -5%;
@@ -158,7 +196,7 @@
   width: 220px;
   height: 220px;
 
-  background: #00ff99;
+  background: #10002b;
 
   top: 60%;
   right: -5%;
@@ -168,7 +206,7 @@
   width: 180px;
   height: 180px;
 
-  background: #008cff;
+  background: #07253d;
 
   bottom: 10%;
   left: 20%;
@@ -178,7 +216,7 @@
   width: 200px;
   height: 200px;
 
-  background: #00e5ff;
+  background: #10002b;
 
   top: 20%;
   right: 20%;
@@ -241,19 +279,22 @@
 
 /* 🧠 TITLE */
 .title {
-  font-family: 'Exo 2', sans-serif; 
-  font-size: 52px;
-  font-weight: 700;
-
   color: #0aefff;
 
   text-shadow:
-    0 0 5px #b5e48c,
-    0 0 15px #ffe8d6,
-    0 0 30px #ffe8d6;
+    0 0 10px rgba(10,239,255,0.6);
 
-  letter-spacing: 2px;
+  animation: floatTitle 3s ease-in-out infinite;
+}
 
+@keyframes floatTitle {
+  0%,100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
 }
 
 /* 📝 SUBTITLE */
@@ -295,10 +336,8 @@
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid #90caf9;
 
-  box-shadow:
-    0 0 30px rgba(0,191,255,0.12);
 
   box-sizing: border-box;
 }
@@ -346,16 +385,15 @@
   background:
     linear-gradient(
       135deg,
-      #00bfff,
-      #008cff
+      #081e26,
+      #06090b
     );
 
   color: white;
 
   border-bottom-right-radius: 6px;
 
-  box-shadow:
-    0 0 20px rgba(0,191,255,0.35);
+
 }
 
 /* 🤖 AI MESSAGE */
@@ -364,7 +402,7 @@
 
   color: #d9f4ff;
 
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(154, 143, 143, 0.08);
 
   border-bottom-left-radius: 6px;
 
@@ -378,7 +416,6 @@
   max-width: 950px;
 
   margin-top: 25px;
-
   display: flex;
   gap: 18px;
 }
@@ -386,26 +423,16 @@
 /* 📝 INPUT */
 .question-input {
   flex: 1;
-
   height: 65px;
-
   border: none;
   outline: none;
-
   border-radius: 18px;
-
   padding: 0 24px;
-
-  background: rgba(255,255,255,0.06);
-
+  background: rgba(17, 6, 6, 0.06);
   color: white;
-
   font-size: 16px;
-
   backdrop-filter: blur(10px);
-
-  border: 1px solid rgba(255,255,255,0.08);
-
+  border: 1px solid #bbdefb;
   box-shadow:
     inset 0 0 10px rgba(255,255,255,0.03),
     0 0 20px rgba(0,191,255,0.08);
@@ -420,35 +447,47 @@
   min-width: 170px;
 
   border: none;
-  outline: none;
-
   border-radius: 18px;
-
-  cursor: pointer;
 
   font-size: 16px;
   font-weight: 600;
-
   color: white;
 
-  background:
-    linear-gradient(
-      135deg,
-      #00bfff,
-      #00ff99
-    );
+  background: linear-gradient(
+    135deg,
+    #1b0247,
+    #07419f
+  );
+  border:0.5px solid white;
 
   box-shadow:
-    0 0 20px rgba(0,255,153,0.3);
+    0 0 15px rgba(124,58,237,0.35);
 
-  transition: 0.3s ease;
+  transition: all 0.3s ease;
+}
+.ai-message {
+  background: rgba(10, 20, 41, 0.9);
+
+  color: #dbeafe;
+
+  border: 1px solid rgba(59,130,246,0.15);
+
+  box-shadow:
+    0 0 20px rgba(59,130,246,0.08);
+}
+
+.ask-btn:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 0 35px rgba(124,58,237,0.5);
 }
 
 .ask-btn:hover {
   transform: translateY(-2px) scale(1.03);
 
   box-shadow:
-    0 0 28px rgba(0,255,153,0.5);
+    0 0 28px rgba(2, 29, 18, 0.5);
 }
 
 /* ⏳ LOADER */

@@ -106,10 +106,10 @@ button {
   overflow: hidden;
 
   /* 🌊 deep navy + ocean glow base */
-  background: radial-gradient(circle at 20% 20%, #102a5c, transparent 40%),
-              radial-gradient(circle at 80% 30%, #1b3b7a, transparent 45%),
+  background: radial-gradient(circle at 20% 20%, #240046, transparent 40%),
+              radial-gradient(circle at 80% 30%, #240046, transparent 45%),
               radial-gradient(circle at 50% 80%, #0a1633, transparent 50%),
-              linear-gradient(135deg, #050816, #061a3a, #050816);
+              linear-gradient(135deg, #050816, #1b2a41, #050816);
 
   animation: oceanFlow 12s ease-in-out infinite alternate;
 }
@@ -139,7 +139,7 @@ button {
 .orb-1 {
   width: 220px;
   height: 220px;
-  background: #0e2960;
+  background: #240046;
   top: 10%;
   left: 15%;
 }
@@ -147,7 +147,7 @@ button {
 .orb-2 {
   width: 180px;
   height: 180px;
-  background: #7c4dff;
+  background: #240046;
   top: 60%;
   left: 20%;
 }
@@ -155,7 +155,7 @@ button {
 .orb-3 {
   width: 250px;
   height: 250px;
-  background: #00d4ff;
+  background: #240046;
   top: 30%;
   right: 10%;
 }
@@ -163,7 +163,7 @@ button {
 .orb-4 {
   width: 160px;
   height: 160px;
-  background: #ff4fd8;
+  background: #240046;
   bottom: 10%;
   right: 25%;
 }
@@ -171,7 +171,7 @@ button {
 .orb-5 {
   width: 200px;
   height: 200px;
-  background: #4dff88;
+  background: #10002b;
   bottom: 20%;
   left: 50%;
 }
@@ -216,7 +216,7 @@ button {
   text-align: center;
 
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid #62b6cb;
 }
 
 /* 🎯 FILE INPUT */
@@ -272,7 +272,7 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  background: #050816;
+  background: #240046;
 }
 
 
