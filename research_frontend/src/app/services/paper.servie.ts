@@ -9,7 +9,7 @@ export class PaperService {
   // =========================
   // BASE URL
   // =========================
-private baseUrl = 'https://research-assistant-node.onrender.com/api/papers';
+private baseUrl = 'https://ai-research-assistant-47li.onrender.com/api/papers';
 
   // =========================
   // UPLOAD PDF
