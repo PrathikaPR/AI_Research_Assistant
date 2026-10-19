@@ -338,26 +338,36 @@ const generateFlowchart = async (req, res) => {
 
         const response = await groq.chat.completions.create({
             model: "openai/gpt-oss-120b",
-            messages: [
-                {
-                    role: 'system',
-                    content: 'You are an AI that creates flowcharts from research papers. Only use information from the provided text.'
-                },
-                {
-                    role: 'user',
-                    content: `Convert this research paper into a step-by-step flowchart.
+            
+messages: [
+    {
+        role: 'system',
+        content: `You are an AI that converts research papers into clear flowchart steps.
+Use only information from the provided text.
+Return each step on a separate line.
+Do not combine multiple steps on one line.
+Do not use arrows, bullets, numbering, headings, or explanations.
+Each line must contain exactly one short, meaningful step.
+Return only the steps, one per line.`
+    },
+    {
+        role: 'user',
+        content: `Convert the research paper into a sequential flowchart.
 
-Rules:
-- Use arrows (→) between steps  
-- Keep each step short and clear
-- Return steps only
+Requirements:
+- Identify the main steps in their correct order.
+- Keep each step short and clear.
+- Put each step on a separate line.
+- Include only steps supported by the research paper.
+- Do not return the entire workflow as one sentence.
 
 Research Paper Text:
 """
 ${text}
 """`
-                }
-            ],
+    }
+],
+
             temperature: 0.3,
             max_tokens: 800
         });
