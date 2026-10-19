@@ -104,35 +104,45 @@ export class Login implements OnInit, AfterViewInit, OnDestroy {
 
   // ── FORM SUBMIT ──────────────────────────────────────────────
 
+
 onSubmit(): void {
+  if (this.isLoading) {
+    return;
+  }
+
   if (this.loginForm.invalid) {
-    alert('Please enter a valid email and password.');
     this.loginForm.markAllAsTouched();
     return;
   }
 
   this.isLoading = true;
-  this.errorMessage = ''; // ← clear previous error
+  this.errorMessage = '';
 
-  const { email, password } = this.loginForm.value;
+  const email = String(this.loginForm.value.email || '')
+    .trim()
+    .toLowerCase();
+
+  const password = String(this.loginForm.value.password || '');
 
   this.authService.login({ email, password }).subscribe({
     next: (res: any) => {
-      this.isLoading = false;
-
-      if (res?.success) {
+      if (res?.success && res?.token) {
         this.authService.saveToken(res.token, res.user);
-        this.router.navigate(['/dashboard']); // 
+        this.router.navigate(['/dashboard']);
       } else {
-        this.errorMessage = res?.message || 'Invalid credentials!'; 
-        this.cdr.detectChanges();
+        this.errorMessage =
+          res?.message || 'Invalid email or password.';
       }
-    },
 
-    error: (err: any) => {
       this.isLoading = false;
-      this.errorMessage = err.error?.message || 'Invalid email or password!'; 
-      this.cdr.detectChanges();
+    },
+    error: (err: any) => {
+      console.error('Login failed:', err.status, err.error);
+
+      this.errorMessage =
+        err.error?.message || 'Login failed. Please try again.';
+
+      this.isLoading = false;
     }
   });
 }
@@ -217,7 +227,7 @@ loginWithGoogle(): void {
   fillDemo(): void {
   this.loginForm.patchValue({
     email: 'demo@email.com',
-    password: 'demo123'
+    password: 'Demo@12345'
   });
 }
 }
