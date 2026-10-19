@@ -48,11 +48,13 @@ const login = async (req, res) => {
       return res.status(400).json({ success: false, message: 'All fields are required' });
 
     const user = await User.findOne({ email });
+    console.log("User found:", !!user);
     if (!user)
       return res.status(401).json({ success: false, message: 'Invalid email or password' });
 
     // ✅ compare directly
     const isMatch = await bcrypt.compare(password, user.password);
+    console.log("Password matches:", isMatch);
     if (!isMatch)
       return res.status(401).json({ success: false, message: 'Invalid email or password' });
 
