@@ -131,7 +131,7 @@ const generateSummary = async (req, res) => {
         }
 
         const response = await groq.chat.completions.create({
-            model: 'llama-3.3-70b-versatile',
+            model: "openai/gpt-oss-120b",
             messages: [
                 {
                     role: 'system',
@@ -211,7 +211,7 @@ const suggestQuestions = async (req, res) => {
             .slice(0, 3000);
 
         const response = await groq.chat.completions.create({
-            model: 'llama-3.3-70b-versatile',
+            model: "openai/gpt-oss-120b",
             messages: [
                 {
                     role: 'system',
@@ -273,7 +273,7 @@ const askAI = async (req, res) => {
             .slice(0, 4000);
 
         const response = await groq.chat.completions.create({
-            model: 'llama-3.3-70b-versatile',
+            model: "openai/gpt-oss-120b",
             messages: [
                 {
                     role: 'system',
@@ -337,7 +337,7 @@ const generateFlowchart = async (req, res) => {
             .slice(0, 3000);
 
         const response = await groq.chat.completions.create({
-            model: 'llama-3.3-70b-versatile',
+            model: "openai/gpt-oss-120b",
             messages: [
                 {
                     role: 'system',
