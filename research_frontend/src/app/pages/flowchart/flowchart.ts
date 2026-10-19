@@ -38,12 +38,15 @@ export class Flowchart implements OnInit {
   }
 
   // 🔧 PARSE TEXT INTO STEPS ARRAY
-  parseSteps(text: string): string[] {
-    return text
-      .split('\n')
-      .map(line => line.trim())
-      .filter(line => line.length > 0 && line !== '→' && line !== '↓');
-  }
+
+parseSteps(text: string): string[] {
+  return text
+    .split(/\r?\n|→|↓|➜|➔/)
+    .map(step => step.trim())
+    .map(step => step.replace(/^(?:[-*•]|\d+[.)])\s*/, '').trim())
+    .filter(step => step.length > 0);
+}
+
 
   // 🧠 GENERATE FLOWCHART
   generateFlowchart(paperId: string): void {

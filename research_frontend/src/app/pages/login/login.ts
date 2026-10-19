@@ -226,7 +226,7 @@ loginWithGoogle(): void {
 
   fillDemo(): void {
   this.loginForm.patchValue({
-    email: 'demo@email.com',
+    email: 'demo@gmail.com',
     password: 'Demo@12345'
   });
 }
