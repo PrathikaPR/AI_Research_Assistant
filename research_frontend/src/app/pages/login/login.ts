@@ -106,6 +106,7 @@ export class Login implements OnInit, AfterViewInit, OnDestroy {
 
 onSubmit(): void {
   if (this.loginForm.invalid) {
+    alert('Please enter a valid email and password.');
     this.loginForm.markAllAsTouched();
     return;
   }
